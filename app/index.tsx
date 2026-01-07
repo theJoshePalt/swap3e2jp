@@ -106,7 +106,7 @@ export default function IndexScreen() {
       >
         {/* LIKE */}
         <Animated.View
-          style={{ opacity: likeOpacity }}
+          style={{ opacity: likeOpacity, zIndex: 10 }}
           className="absolute top-6 left-6"
         >
           <Feather name="check" size={48} color="#ffffff" />
@@ -114,7 +114,7 @@ export default function IndexScreen() {
 
         {/* NOPE */}
         <Animated.View
-          style={{ opacity: nopeOpacity }}
+          style={{ opacity: nopeOpacity, zIndex: 10 }}
           className="absolute top-6 right-6"
         >
           <Feather name="x" size={48} color="#FF00A1" />
@@ -124,8 +124,9 @@ export default function IndexScreen() {
         {imageUri ? (
           <Image
             source={{ uri: imageUri }}
-            className="w-full h-full rounded-3xl"
+            className="w-full h-full"
             resizeMode="cover"
+            style={{ zIndex: 1 }}
           />
             ) : (
           <>
