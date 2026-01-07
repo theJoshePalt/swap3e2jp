@@ -4,6 +4,10 @@ import { Feather } from "@expo/vector-icons";
 import "@/global.css";
 const { width } = Dimensions.get("window");
 const SWIPE_THRESHOLD = 120;//// esto da la sensibilidad de movimiento
+import * as ImagePicker from "expo-image-picker";
+import { Image, TouchableOpacity } from "react-native";
+import { useState } from "react";
+
 
 export default function IndexScreen() {
   const position = useRef(new Animated.ValueXY()).current;// valor animado que va cambiando con la posicion del deo
@@ -67,6 +71,25 @@ export default function IndexScreen() {
     }).start();
   };
 
+  const [imageUri, setImageUri] = useState<string | null>(null);// guarda la imagen
+  const takePhoto = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();//para tomar la foto primero se pide permiso al usuario de acceder
+  
+    if (!permission.granted) {
+      alert("Permiso de cámara denegado");
+      return;
+    }
+  
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 0.8,
+    });
+  
+    if (!result.canceled) {
+      setImageUri(result.assets[0].uri);
+    }
+  };
+
   return (
     <View className="flex-1 bg-[#75004A] items-center justify-center">
       
@@ -103,6 +126,16 @@ export default function IndexScreen() {
         <Text className="text-[#FFffff] text-center">
           A LA DERECHA PARA SI
         </Text>
+        
+      {/* CAMARA */}
+      <TouchableOpacity
+        onPress={takePhoto}
+        className="mt-8 bg-black px-6 py-3 rounded-xl"
+      >
+        <Text className="text-white font-bold">TOMAR FOTO</Text>
+      </TouchableOpacity>
+
+
       </Animated.View>
     </View>
   );
