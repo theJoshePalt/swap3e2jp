@@ -102,7 +102,7 @@ export default function IndexScreen() {
         style={{
           transform: [...position.getTranslateTransform(), { rotate }],
         }}
-        className="w-[85%] h-[60%] bg-[#000000] rounded-3xl items-center justify-center shadow-lg"
+        className="w-[85%] h-[60%] bg-[#000000] items-center justify-center shadow-lg"
       >
         {/* LIKE */}
         <Animated.View
