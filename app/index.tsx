@@ -92,7 +92,10 @@ export default function IndexScreen() {
 
   return (
     <View className="flex-1 bg-[#75004A] items-center justify-center">
-      
+      <Text className="text-[#FF00A1] text-4xl font-bold text-center ">
+        SWIPE
+      </Text>
+
       {/* CARD */}
       <Animated.View
         {...panResponder.panHandlers}
@@ -117,26 +120,35 @@ export default function IndexScreen() {
           <Feather name="x" size={48} color="#FF00A1" />
         </Animated.View>
 
-        <Text className="text-[#FFB8E5] text-3xl font-bold text-center ">
-          SWIPE
-        </Text>
-        <Text className="text-[#FF00A1] text-center">
-          A LA IZQUIERDA PARA NO
-        </Text>
-        <Text className="text-[#FFffff] text-center">
-          A LA DERECHA PARA SI
-        </Text>
-        
-      {/* CAMARA */}
-      <TouchableOpacity
-        onPress={takePhoto}
-        className="mt-8 bg-black px-6 py-3 rounded-xl"
-      >
-        <Text className="text-white font-bold">TOMAR FOTO</Text>
-      </TouchableOpacity>
 
+        {imageUri ? (
+          <Image
+            source={{ uri: imageUri }}
+            className="w-full h-full rounded-3xl"
+            resizeMode="cover"
+          />
+            ) : (
+          <>
+          </>
+        )}
+
+        
+        {/* CAMARA */}
+        <TouchableOpacity
+          onPress={takePhoto}
+          className="absolute bottom-12 bg-black p-4 rounded-full"
+        >
+          <Feather name="camera" size={28} color="#FF00A1" />
+        </TouchableOpacity>
 
       </Animated.View>
+        
+        <Text className="text-[#FFB8E5] text-center">
+            A LA IZQUIERDA PARA NO
+        </Text>
+        <Text className="text-white text-center">
+            A LA DERECHA PARA SI
+        </Text>
     </View>
   );
 }
